@@ -1,25 +1,39 @@
 import  React from 'react'
 import classes from "./Finished.module.css"
+import Button from "../UI/Button/Button";
 
 const FinishedQuiz = (props) => {
+    const successCount = Object.keys(props.results).reduce((total, key) =>{
+        if(props.results[key] === 'success'){
+            total++
+        }
+        return total
+    }, 0)
+
     return(
         <div className={classes.FinishedQuiz}>
             <ul>
-                <li>
-                    <strong> 1. </strong>
-                    Ne kylyp jatasyn
-                    <i className={'fa fa-times ' + classes.success}/>
-                </li>
-                <li>
-                    <strong> 2. </strong>
-                    Ne kylyp jatasyn
-                    <i className={'fa fa-check ' + classes.NoRight}/>
-                </li>
+                {
+                    props.quiz.map((quizItem, index) =>{
+                        const cls = [
+                            'fa', props.results[quizItem.id] === "NoRight" ? ' fa-times' : 'fa-check',
+                            classes[props.results[quizItem.id]]
+                        ]
+                        return (
+                            <li key={index} >
+                                <strong>{index + 1}</strong> &nbsp;
+                                {quizItem.question}
+                                <i className={cls.join(" ")}/>
+                            </li>
+                        )
+                    })
+                }
             </ul>
 
-            <p> Правильно 4 из 10 </p>
+            <p> Правильно {successCount} из {props.quiz.length} </p>
             <div>
-                <button>Повторить</button>
+                <Button onClick={props.tryAgain} type="primary">Повторить </Button>
+                <Button type="success">Перейти в список вопросов</Button>
             </div>
         </div>
     )
