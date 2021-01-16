@@ -11,7 +11,7 @@ class Quiz extends React.Component {
         answerState: null, // {id: "Success", "Error"}
         quiz: [
             {
-                question: "Выберите хобби Арстана",
+                question: "Выберите хобби X'a ",
                 rightAnswerId: 2,
                 id: 1,
                 answers: [
@@ -22,7 +22,7 @@ class Quiz extends React.Component {
                 ]
             },
             {
-                question: "В каком университете он учится? ",
+                question: "В каком университете учится X ? ",
                 rightAnswerId: 4,
                 id: 2,
                 answers: [
